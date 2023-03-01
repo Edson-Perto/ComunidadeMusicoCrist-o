@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+        <div class="container">
+            <div class="row" style="text-align: center">
+                <h1 class="container-xl mt-1 row justify-content-center" style="color:Maroon">Sua comunidade de músicos que tem prazer em usar seus dons para honra, glória e louvor a Deus!</h1>
+                <h2 style="color:MidnightBlue"> Deus é bom em todo o tempo, em todo o tempo Deus é bom!!!</h2>
+                <h3>Tudo é possivel ao que crê, Deus é bom e Ele quer nosso bem!</h3>
+            </div>
+            <p>Ser músico na Igreja não é apenas saber tocar, mas sim, conseguir tocar, tocar o coração de quem ouve
+            principalmente tocar a Deus, pois o dom de todo músico cristão vem de Deus e é para Deus!</p>
+            <p>"Tocar", por que sei tocar, ou porque só tem eu, são questionamentos comuns na mente de um cristão que
+                é músico na Igreja, mas o que temos que ter em mente é o por que "tocamos". É por que sei tocar, por
+                isso tenho que tem ima vaga na banda, ou por que se eu não tocar fica a igreja fica sem músico.
+            </p>
+            <p>A realidade é que hoje a maioria dos músicos estão nessa situação, por não entenderem ou ignoraremm o motivo pelo qual
+                um músico toca na Igreja, que é a "adoração", louvar a Deus atravéz de um instrumento, por que na verdade um
+                músico cristão é um intrumento usando outro instrumento.</p>
+
+
+        </div>
+        <div class="container-xl mt-1">
+            {% for post in posts %}
+            <div class="row border mt-2 p-1 meupost">
+                <div class="col col-2">
+                    <div class="image pe-3"> <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded" width="70" ></div>
+                    <b>{{ post.autor.nome_usuario}}</b><br>
+                    <b><u><i>{{ post.autor.igreja }}</i></u></b>
+
+                    <div class="row justify-content-center">
+                        <button type="button" class="btn btn-success mt-1 btn-sm" disabled>{{ post.autor.instrumentos.replace(';', ', ') }}</button>
+                    </div>
+                </div>
+                <div class="col col-9">
+                    <a href="{{ url_for('exibir_post', post_id=post.id) }}"><h3>{{ post.titulo }}</h3></a>
+                    <p>{{ post.corpo }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+{% endblock %}

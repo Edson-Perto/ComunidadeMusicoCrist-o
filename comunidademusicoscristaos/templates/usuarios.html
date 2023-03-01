@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+        <div class="container-xl">
+            <h1>Usuários</h1>
+            <hr>
+            {% for usuario in lista_usuarios %}
+
+                <div class="container mt-2 d-flex justify-content-start" xmlns="http://www.w3.org/1999/html">
+                    <div class="card p-1">
+                        <div class="d-flex align-items-center">
+                            <div class="image pe-4"> <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(usuario.foto_perfil)) }}" class="rounded" width="100" ></div>
+                            <div class="col-6 ml- w-100 ">
+                                <h2 class="mb-0 mt-0 ">{{ usuario.nome_usuario }}</h2> <u><span>{{ usuario.email }}</span></u>
+                                <b><span class="row justify-content-center" style="strong">{{ usuario.igreja }}</span></b>
+                            </div>
+                            <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                                <div class="d-flex flex-column align-items-center pe-3">
+                                    {% if 'Não Informado' in usuario.instrumentos %}
+                                        <span class="articles1">Instrumentos</span>
+                                        <span class="number3">0</span>
+                                    {% else %}
+                                        <span class="articles1">Instrumentos</span>
+                                        <span class="number3">{{ usuario.instrumentos.count(';') + 1 }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="d-flex flex-column align-items-center pe-1">
+                                    <span class="rating1">Posts</span>
+                                    <span class="number3">{{ usuario.contar_posts() }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-start">
+                    <div class="col col-10" style="text-align: center">
+                        <strong>Intrumentos tocados:</strong><br>
+                        {% for instrumento in usuario.instrumentos.split(';') %}
+                            <button type="button" class="btn btn-info mt-2 btn-sm" disabled>{{ instrumento }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+<div class="row mt-5">
+
+</div>
+
+{% endblock %}
